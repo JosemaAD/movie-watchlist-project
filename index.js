@@ -19,6 +19,8 @@ document.getElementById('button-addon').addEventListener('click', async() => {
 
 
 async function getFilmsDetails(arr){
+    document.getElementById('films').innerHTML = loading()
+
     let movieHtml = ''
 
     for(let item of arr){
@@ -51,4 +53,8 @@ function reset(){
     filmSearched.value = ''
     document.getElementById('movie-checkbox').checked = false
     document.getElementById('serie-checkbox').checked = false
+}
+
+function loading(){
+    return `<img src="./images/loading.gif">`
 }
