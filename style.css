@@ -1,0 +1,84 @@
+*{
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    background-color: #000
+}
+
+.custom-bg{
+    background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('./images/THJJRUhNlEc.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 210px;
+}
+
+.custom-width{
+    max-width: 550px;
+}
+
+.watchlist-btn{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    text-align: center;
+}
+
+label{
+    color: #fff;
+}
+
+.search-film{
+    margin-bottom: -15px;
+}
+
+.btn.btn-outline-secondary, .form-control{
+    background: #fff;
+    color: #374151;
+    border: 1px solid  #D1D5DB;
+    background: var(--gray-50, #F9FAFB);
+    max-width: 300px;
+}
+
+.btn.btn-outline-secondary:hover{
+    color:inherit
+}
+
+.form-control:focus{
+    border: 1px solid #D1D5DB !important;
+    box-shadow: none;
+}
+
+.films{
+    min-height: 570px;
+    background-color: #fff;
+}
+
+.film-title{
+    font-size: 1.1em;
+    margin-right: 10px;
+}
+
+.bi-star-fill{
+    color: gold;
+    margin-right: 10px;
+}
+
+.film-rating{
+    display: inline;
+    font-size: 13px;
+}
+
+.film-runtime{
+    font-size: 13px;
+}
+
+.film-genre, #add-to-watchlist{
+    font-size: 13px;
+}
+
+.film-plot{
+    font-size: 14px;
+    color: #6B7280;
+}
