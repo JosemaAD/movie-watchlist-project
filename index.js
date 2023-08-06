@@ -24,7 +24,6 @@ async function getFilmsDetails(arr){
     for(let item of arr){
         let BASEURL = `https://www.omdbapi.com/?i=`
         const res = await fetch(BASEURL+item+APIKEY)
-        console.log((BASEURL+item+APIKEY))
         const data = await res.json()        
         movieHtml += `
         <div class="row my-3 align-items-center">
