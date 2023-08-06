@@ -5,9 +5,9 @@ document.getElementById('button-addon').addEventListener('click', async() => {
     let wordSearched = filmSearched.value
     let BASEURL
     
-    document.getElementById('movie-checkbox').checked === true ? BASEURL = 'http://www.omdbapi.com/?type=movie&s=' 
-        : document.getElementById('serie-checkbox').checked === true ? BASEURL = 'http://www.omdbapi.com/?type=series&s=' 
-        : BASEURL = 'http://www.omdbapi.com/?s=' 
+    document.getElementById('movie-checkbox').checked === true ? BASEURL = 'https://www.omdbapi.com/?type=movie&s=' 
+        : document.getElementById('serie-checkbox').checked === true ? BASEURL = 'https://www.omdbapi.com/?type=series&s=' 
+        : BASEURL = 'https://www.omdbapi.com/?s=' 
 
     const res = await fetch(BASEURL+wordSearched+APIKEY)
     const data = await res.json()
@@ -22,8 +22,9 @@ async function getFilmsDetails(arr){
     let movieHtml = ''
 
     for(let item of arr){
-        let BASEURL = `http://www.omdbapi.com/?i=`
+        let BASEURL = `https://www.omdbapi.com/?i=`
         const res = await fetch(BASEURL+item+APIKEY)
+        console.log((BASEURL+item+APIKEY))
         const data = await res.json()        
         movieHtml += `
         <div class="row my-3 align-items-center">
