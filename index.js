@@ -1,6 +1,7 @@
 const APIKEY = '&page=1&plot=short&apikey=2d950d9b'
 const filmSearched = document.getElementById('film-searched')
 let filmsObjArray = []
+let watchlist = []
 
 document.addEventListener('click', (e) => {
     e.target.dataset.add ? handleAddToWatchlist(e.target.dataset.add) : ''  
@@ -18,14 +19,14 @@ document.getElementById('search-film-btn').addEventListener('click', async() => 
     
     filmsObjArray = data.Search
 
-    filmsID = filmsObjArray.map((film)=>{
+    let filmsID = filmsObjArray.map((film)=>{
         return film.imdbID
     })
 
     getFilmsDetails(filmsID)
 })
 
-async function getFilmsDetails(arr){
+export async function getFilmsDetails(arr){
     document.getElementById('films').innerHTML = loading()
     let movieHtml = ''
     for(let item of arr){
@@ -59,7 +60,10 @@ function handleAddToWatchlist(filmID){
     const filmAdded = filmsObjArray.filter(function(film){
         return film.imdbID === filmID
     })[0]
-    console.log(filmAdded)
+    watchlist.unshift(filmAdded)
+    
+    localStorage.setItem("watchlist", JSON.stringify(watchlist) )
+
 }
 
 function reset(){
@@ -71,3 +75,5 @@ function reset(){
 function loading(){
     return `<img src="./images/loading.gif">`
 }
+
+export default watchlist;
