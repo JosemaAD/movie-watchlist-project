@@ -39,6 +39,11 @@ body{
     text-align: center;
 }
 
+.add-to-watchlist{
+    color: #B465DB;
+    font-weight: 600;
+}
+
 label{
     color: #fff;
 }

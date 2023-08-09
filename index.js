@@ -3,8 +3,15 @@ const filmSearched = document.getElementById('film-searched')
 let filmsObjArray = []
 let watchlist = []
 
+let watchlistFromLocalStorage = JSON.parse( localStorage.getItem("watchlist") )
+watchlistFromLocalStorage ? watchlist = watchlistFromLocalStorage : watchlist = []
+
 document.addEventListener('click', (e) => {
-    e.target.dataset.add ? handleAddToWatchlist(e.target.dataset.add) : ''  
+    if(e.target.dataset.add){
+        handleAddToWatchlist(e.target.dataset.add) 
+        handlefilmAddedtoWatchlist(e.target.dataset.add)
+    }
+    
 })
 
 document.getElementById('search-film-btn').addEventListener('click', async() => {
@@ -44,7 +51,7 @@ export async function getFilmsDetails(arr){
                             <div class="row align-items-center justify-content-center">
                                 <div class="col-md-3 col-12"><p class="film-runtime">${data.Runtime}</p></div>
                                 <div class="col-md-5 col-12"><p class="film-genre">${data.Genre}</p></div>
-                                <div class="col-md-4 col-12"><p><a href="#" data-add="${data.imdbID}" id="add-to-watchlist">Watchlist</a></p></div>
+                                <div class="col-md-4 col-12"><p><a href="#" class="add-to-watchlist" data-add="${data.imdbID}">add to my list</a></p></div>
                             </div>
                             <p class="film-plot">${data.Plot}</p>
                         </div>
@@ -60,10 +67,19 @@ function handleAddToWatchlist(filmID){
     const filmAdded = filmsObjArray.filter(function(film){
         return film.imdbID === filmID
     })[0]
-    watchlist.unshift(filmAdded)
     
-    localStorage.setItem("watchlist", JSON.stringify(watchlist) )
+    //Array
+    watchlist.unshift(filmAdded)
 
+    console.log(watchlist)
+
+    //Mandar a localStorage watchlist
+    localStorage.setItem("watchlist", JSON.stringify(watchlist) )
+}
+
+function handlefilmAddedtoWatchlist(filmID){
+    let filmAdded = document.querySelectorAll(`[data-add="${filmID}"]`)
+    filmAdded[0].childNodes[0].data = 'added'
 }
 
 function reset(){
