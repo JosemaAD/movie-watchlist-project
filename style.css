@@ -8,8 +8,9 @@ body{
     background: -moz-linear-gradient(135deg, hsla(190, 73%, 73%, 1) 0%, hsla(280, 62%, 63%, 1) 100%);
     background: -webkit-linear-gradient(135deg, hsla(190, 73%, 73%, 1) 0%, hsla(280, 62%, 63%, 1) 100%);
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#87DBEC", endColorstr="#B465DB", GradientType=1 );
-    height: 100vh;
-    background-size: auto;
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .main{

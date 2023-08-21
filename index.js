@@ -1,3 +1,5 @@
+import {reset, loading, getCurrentURL} from './utils.js';
+
 const APIKEY = '&page=1&plot=short&apikey=2d950d9b'
 const filmSearched = document.getElementById('film-searched')
 let filmsObjArray = []
@@ -11,7 +13,6 @@ document.addEventListener('click', (e) => {
         handleAddToWatchlist(e.target.dataset.add) 
         handlefilmAddedtoWatchlist(e.target.dataset.add)
     }
-    
 })
 
 document.getElementById('search-film-btn').addEventListener('click', async() => {
@@ -39,7 +40,14 @@ export async function getFilmsDetails(arr){
     for(let item of arr){
         let BASEURL = `https://www.omdbapi.com/?i=`
         const res = await fetch(BASEURL+item+APIKEY)
-        const data = await res.json()   
+        const data = await res.json()
+        
+        let button = ''    
+        if(getCurrentURL() === 'watchlist.html'){
+            button = `<div class="col-md-4 col-12"><p><a href="" class="add-to-watchlist" data-remove="${data.imdbID}">remove</a></p></div>`
+        }else{
+            button = `<div class="col-md-4 col-12"><p><a href="#" class="add-to-watchlist" data-add="${data.imdbID}">add to my list</a></p></div>`
+        }
            
         movieHtml += `
                     <div class="row my-3 align-items-center">
@@ -51,7 +59,7 @@ export async function getFilmsDetails(arr){
                             <div class="row align-items-center justify-content-center">
                                 <div class="col-md-3 col-12"><p class="film-runtime">${data.Runtime}</p></div>
                                 <div class="col-md-5 col-12"><p class="film-genre">${data.Genre}</p></div>
-                                <div class="col-md-4 col-12"><p><a href="#" class="add-to-watchlist" data-add="${data.imdbID}">add to my list</a></p></div>
+                                ${button}
                             </div>
                             <p class="film-plot">${data.Plot}</p>
                         </div>
@@ -69,10 +77,14 @@ function handleAddToWatchlist(filmID){
     })[0]
     
     //Array
-    watchlist.unshift(filmAdded)
-
-    console.log(watchlist)
-
+    if(watchlist.some(film => film.imdbID === filmAdded.imdbID)){
+        setTimeout(() => {
+            document.querySelectorAll(`[data-add="${filmAdded.imdbID}"]`)[0].childNodes[0].data = 'already in your watchlist'
+        }, 1000)
+        
+    }else{
+        watchlist.unshift(filmAdded)
+    }
     //Mandar a localStorage watchlist
     localStorage.setItem("watchlist", JSON.stringify(watchlist) )
 }
@@ -82,14 +94,8 @@ function handlefilmAddedtoWatchlist(filmID){
     filmAdded[0].childNodes[0].data = 'added'
 }
 
-function reset(){
-    filmSearched.value = ''
-    document.getElementById('movie-checkbox').checked = false
-    document.getElementById('serie-checkbox').checked = false
-}
 
-function loading(){
-    return `<img src="./images/loading.gif">`
-}
+  
+getCurrentURL()
 
 export default watchlist;
