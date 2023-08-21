@@ -11,6 +11,5 @@ export function loading(){
 export function getCurrentURL () {
     let url = window.location.href
     let slug = url.split('/')
-    console.log(slug[3])
     return slug[3]
 }
