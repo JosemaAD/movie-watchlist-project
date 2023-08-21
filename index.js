@@ -43,7 +43,7 @@ export async function getFilmsDetails(arr){
         const data = await res.json()
         
         let button = ''    
-        if(getCurrentURL() === 'watchlist.html'){
+        if(getCurrentURL() === 'watchlist'){
             button = `<div class="col-md-4 col-12"><p><a href="" class="add-to-watchlist" data-remove="${data.imdbID}">remove</a></p></div>`
         }else{
             button = `<div class="col-md-4 col-12"><p><a href="#" class="add-to-watchlist" data-add="${data.imdbID}">add to my list</a></p></div>`
