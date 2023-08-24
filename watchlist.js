@@ -21,17 +21,10 @@ function handleRemoveToWatchlist(filmID){
     
     //Array
     if(filmsFromLocalStorage.some(film => film.imdbID === filmDeleted.imdbID)){
-        
         filmsFromLocalStorage.shift(filmDeleted)
-
-        const index = filmsFromLocalStorage.indexOf(filmDeleted);
-
-        filmsFromLocalStorage = filmsFromLocalStorage.splice(index, 1);
-
-
         localStorage.setItem("watchlist", JSON.stringify(filmsFromLocalStorage) )
     }
-
+    console.log(filmsFromLocalStorage)
     getFilmsDetails(filmsID)
 }
 
