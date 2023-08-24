@@ -8,8 +8,8 @@ let filmsID = filmsFromLocalStorage.map((film)=>{
 getFilmsDetails(filmsID)
 
 document.addEventListener('click', (e) => {
-    e.preventDefault()
     if(e.target.dataset.remove){
+        e.preventDefault()
         handleRemoveToWatchlist(e.target.dataset.remove)
     }
 })
@@ -48,19 +48,12 @@ function handleRemoveToWatchlist(filmID){
     
     filmsFromLocalStorage.splice(index, 1)
     
-    console.log(filmsFromLocalStorage)
+    filmsID = filmsFromLocalStorage.map((film)=>{
+        return film.imdbID
+    })
 
-    printFilmsOnWatchlist(filmsFromLocalStorage)
+    getFilmsDetails(filmsID)
 
     localStorage.setItem("watchlist", JSON.stringify(filmsFromLocalStorage))
-
-    //localStorage.setItem("watchlist", JSON.stringify(newArr))
-
-    //filmsFromLocalStorage = JSON.parse( localStorage.getItem("watchlist") )
-
-    // filmsID = filmsFromLocalStorage.map((film)=>{
-    //     return film.imdbID
-    // })
-    // printFilmsOnWatchlist(filmsID)
 
 }
